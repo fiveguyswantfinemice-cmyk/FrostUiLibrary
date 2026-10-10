@@ -3,85 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My UI Library Generator</title>
-    <!-- Tailwind CSS for styling -->
+    <title>Nexus UI Suite - Generator</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen p-6">
+<body class="bg-[#0f1015] text-slate-100 min-h-screen font-sans selection:bg-indigo-500 selection:text-white">
 
-    <div class="max-w-xl mx-auto space-y-6">
-        <!-- Header -->
-        <div class="text-center">
-            <h1 class="text-3xl font-bold text-indigo-400">UI Script Generator</h1>
-            <p class="text-sm text-slate-400 mt-1">Customize your window and copy your script instantly!</p>
-        </div>
-
-        <!-- Customizer Form Card -->
-        <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 space-y-4 shadow-xl">
-            <div>
-                <label class="block text-sm font-medium text-slate-300 mb-1">Window Title</label>
-                <input type="text" id="windowTitle" value="My Custom Hub" 
-                    class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-indigo-500"
-                    oninput="updateScript()">
+    <!-- Top Navigation Bar -->
+    <header class="border-b border-slate-800 bg-[#14151a]/80 backdrop-blur sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-600/30">
+                <i class="fa-solid fa-layer-group text-white"></i>
             </div>
-
             <div>
-                <label class="block text-sm font-medium text-slate-300 mb-1">Accent Color</label>
-                <input type="color" id="accentColor" value="#6366f1" 
-                    class="w-full h-10 bg-slate-900 border border-slate-700 rounded-xl cursor-pointer p-1"
-                    oninput="updateScript()">
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium text-slate-300 mb-1">Button Text</label>
-                <input type="text" id="buttonText" value="Print Hello" 
-                    class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-indigo-500"
-                    oninput="updateScript()">
+                <h1 class="font-bold tracking-tight text-white">Nexus Suite</h1>
+                <p class="text-xs text-slate-400">Interactive UI Script Generator</p>
             </div>
         </div>
+        <button onclick="copyScript()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-4 py-2 rounded-xl font-medium transition shadow-lg shadow-indigo-600/20 flex items-center gap-2">
+            <i class="fa-solid fa-copy"></i> Copy Script
+        </button>
+    </header>
 
-        <!-- Generated Script Output Card -->
-        <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 space-y-3 shadow-xl">
-            <div class="flex justify-between items-center">
-                <span class="text-sm font-medium text-slate-300">Generated Roblox Script</span>
-                <button onclick="copyScript()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-3 py-1.5 rounded-lg font-medium transition">
-                    Copy Script
-                </button>
+    <!-- Main Workspace -->
+    <main class="max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Left Column: Customization Controls (7 Cols) -->
+        <div class="lg:col-span-7 space-y-6">
+            
+            <!-- Window Configurations -->
+            <div class="bg-[#14151a] border border-slate-800/80 rounded-2xl p-6 space-y-4 shadow-xl">
+                <h2 class="text-sm font-semibold tracking-wider text-indigo-400 uppercase flex items-center gap-2">
+                    <i class="fa-solid fa-window-maximize"></i> Window Settings
+                </h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Hub Name</label>
+                        <input type="text" id="windowTitle" value="Nexus Hub" 
+                            class="w-full bg-[#1b1c23] border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 transition"
+                            oninput="updateScript()">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Loading Subtitle</label>
+                        <input type="text" id="windowSub" value="Interface Suite" 
+                            class="w-full bg-[#1b1c23] border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 transition"
+                            oninput="updateScript()">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Config Folder Name</label>
+                        <input type="text" id="configFolder" value="NexusConfigs" 
+                            class="w-full bg-[#1b1c23] border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 transition"
+                            oninput="updateScript()">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Theme Accent Color</label>
+                        <input type="color" id="accentColor" value="#6366f1" 
+                            class="w-full h-[42px] bg-[#1b1c23] border border-slate-800 rounded-xl cursor-pointer p-1.5"
+                            oninput="updateScript()">
+                    </div>
+                </div>
             </div>
-            <pre class="bg-slate-900 p-4 rounded-xl text-xs text-indigo-300 overflow-x-auto border border-slate-700/50"><code id="scriptOutput"></code></pre>
+
+            <!-- Elements Builder Component -->
+            <div class="bg-[#14151a] border border-slate-800/80 rounded-2xl p-6 space-y-4 shadow-xl">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-sm font-semibold tracking-wider text-indigo-400 uppercase flex items-center gap-2">
+                        <i class="fa-solid fa-cubes"></i> Add Elements
+                    </h2>
+                    <span class="text-xs text-slate-500">Click to append to script</span>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <button onclick="addElement('button')" class="bg-[#1b1c23] hover:bg-slate-800 border border-slate-800 py-3 px-4 rounded-xl text-xs font-medium text-slate-300 transition flex flex-col items-center gap-2">
+                        <i class="fa-solid fa-bolt text-indigo-400 text-base"></i> Button
+                    </button>
+                    <button onclick="addElement('toggle')" class="bg-[#1b1c23] hover:bg-slate-800 border border-slate-800 py-3 px-4 rounded-xl text-xs font-medium text-slate-300 transition flex flex-col items-center gap-2">
+                        <i class="fa-solid fa-toggle-on text-indigo-400 text-base"></i> Toggle
+                    </button>
+                    <button onclick="addElement('slider')" class="bg-[#1b1c23] hover:bg-slate-800 border border-slate-800 py-3 px-4 rounded-xl text-xs font-medium text-slate-300 transition flex flex-col items-center gap-2">
+                        <i class="fa-solid fa-sliders text-indigo-400 text-base"></i> Slider
+                    </button>
+                    <button onclick="addElement('dropdown')" class="bg-[#1b1c23] hover:bg-slate-800 border border-slate-800 py-3 px-4 rounded-xl text-xs font-medium text-slate-300 transition flex flex-col items-center gap-2">
+                        <i class="fa-solid fa-list text-indigo-400 text-base"></i> Dropdown
+                    </button>
+                </div>
+
+                <!-- Active Elements List -->
+                <div id="elementsList" class="space-y-2 pt-2">
+                    <!-- Dynamically populated element controls -->
+                </div>
+            </div>
+
         </div>
-    </div>
+
+        <!-- Right Column: Live Code Preview (5 Cols) -->
+        <div class="lg:col-span-5">
+            <div class="bg-[#14151a] border border-slate-800/80 rounded-2xl p-6 sticky top-24 shadow-2xl space-y-4">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Output Script</span>
+                    <span class="text-[10px] bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-2 py-0.5 rounded-full font-medium">Ready to Execute</span>
+                </div>
+                
+                <pre class="bg-[#0b0c10] border border-slate-900 p-4 rounded-xl text-xs text-indigo-300 overflow-x-auto max-h-[500px] leading-relaxed"><code id="scriptOutput"></code></pre>
+            </div>
+        </div>
+
+    </main>
 
     <script>
+        let customElements = [
+            { type: 'button', name: 'Respawn Character' },
+            { type: 'toggle', name: 'Auto Farm Enabled' },
+            { type: 'slider', name: 'WalkSpeed Slider' }
+        ];
+
+        function renderElements() {
+            const list = document.getElementById('elementsList');
+            list.innerHTML = '';
+            
+            customElements.forEach((el, index) => {
+                list.innerHTML += `
+                    <div class="flex items-center gap-3 bg-[#1b1c23] border border-slate-800 p-3 rounded-xl">
+                        <span class="text-xs uppercase font-bold text-indigo-400 w-16">${el.type}</span>
+                        <input type="text" value="${el.name}" oninput="updateElementName(${index}, this.value)" 
+                            class="flex-1 bg-[#14151a] border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+                        <button onclick="removeElement(${index})" class="text-slate-500 hover:text-rose-400 px-2 transition">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            });
+            updateScript();
+        }
+
+        function addElement(type) {
+            customElements.push({ type: type, name: 'New ' + type.charAt(0).toUpperCase() + type.slice(1) });
+            renderElements();
+        }
+
+        function updateElementName(index, val) {
+            customElements[index].name = val;
+            updateScript();
+        }
+
+        function removeElement(index) {
+            customElements.splice(index, 1);
+            renderElements();
+        }
+
         function updateScript() {
             const title = document.getElementById('windowTitle').value;
-            const color = document.getElementById('accentColor').value;
-            const btnText = document.getElementById('buttonText').value;
+            const sub = document.getElementById('windowSub').value;
+            const folder = document.getElementById('configFolder').value;
 
-            // This outputs the Lua script template using the user's choices
-            const scriptText = `-- Generated by My Custom UI Library Builder
-local Library = loadstring(game:HttpGet("YOUR_RAW_GITHUB_LINK_TO_LIBRARY"))()
+            let elementsCode = '';
+            customElements.forEach(el => {
+                if (el.type === 'button') {
+                    elementsCode += `\nTab:CreateButton({\n    Name = "${el.name}",\n    Callback = function()\n        print("${el.name} clicked!")\n    end,\n})\n`;
+                } else if (el.type === 'toggle') {
+                    elementsCode += `\nTab:CreateToggle({\n    Name = "${el.name}",\n    Default = false,\n    Flag = "${el.name.replace(/\s+/g, '')}",\n    Callback = function(Value)\n        print("${el.name}:", Value)\n    end,\n})\n`;
+                } else if (el.type === 'slider') {
+                    elementsCode += `\nTab:CreateSlider({\n    Name = "${el.name}",\n    Range = {16, 250},\n    Increment = 1,\n    CurrentValue = 16,\n    Flag = "${el.name.replace(/\s+/g, '')}",\n    Callback = function(Value)\n        print("${el.name}:", Value)\n    end,\n})\n`;
+                } else if (el.type === 'dropdown') {
+                    elementsCode += `\nTab:CreateDropdown({\n    Name = "${el.name}",\n    Options = {"Option 1", "Option 2", "Option 3"},\n    CurrentOption = "Option 1",\n    Flag = "${el.name.replace(/\s+/g, '')}",\n    Callback = function(Option)\n        print("${el.name} selected:", Option)\n    end,\n})\n`;
+                }
+            });
+
+            const fullScript = `-- Generated via Nexus UI Generator Suite
+local Library = loadstring(game:HttpGet("YOUR_RAW_GITHUB_LINK_HERE"))()
 
 local Window = Library:CreateWindow({
     Name = "${title}",
-    AccentColor = Color3.fromHex("${color}")
+    LoadingTitle = "${sub}",
+    ConfigurationSaving = {
+        Enabled = true,
+        FolderName = "${folder}",
+        FileName = "MainConfig"
+    }
 })
 
-Window:AddButton("${btnText}", function()
-    print("Button clicked from customized UI!")
-end)`;
+local Tab = Window:CreateTab("Main", 4483345998)
+${elementsCode}
+-- Initialize UI Configurations
+Library:LoadConfiguration()`;
 
-            document.getElementById('scriptOutput').innerText = scriptText;
+            document.getElementById('scriptOutput').innerText = fullScript;
         }
 
         function copyScript() {
             const text = document.getElementById('scriptOutput').innerText;
             navigator.clipboard.writeText(text);
-            alert("Script copied to clipboard!");
+            alert("Script successfully copied to clipboard!");
         }
 
-        // Run on load
-        updateScript();
+        // Initialize on load
+        renderElements();
     </script>
 </body>
 </html>
