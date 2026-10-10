@@ -3,136 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rayfield Style Script Builder</title>
+    <title>Rayfield Style Documentation</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        function copyCode(id) {
+            const codeText = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(codeText);
+            alert("Code snippet copied!");
+        }
+    </script>
 </head>
-<body class="bg-[#0b0c10] text-slate-100 min-h-screen font-sans selection:bg-indigo-500 selection:text-white">
+<body class="bg-[#0b0c10] text-slate-300 min-h-screen font-sans flex">
 
-    <header class="border-b border-slate-800/80 bg-[#121318]/90 backdrop-blur sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
-        <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-600/30">
-                <i class="fa-solid fa-code text-white text-sm"></i>
-            </div>
-            <h1 class="font-bold text-white tracking-tight">Script Builder</h1>
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 bg-[#121318] border-r border-slate-800 hidden md:block fixed h-screen overflow-y-auto p-4 space-y-6">
+        <div class="flex items-center gap-2.5 px-2">
+            <div class="w-7 h-7 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xs">R</div>
+            <span class="font-bold text-white tracking-tight">Rayfield Suite</span>
         </div>
-        <button onclick="copyScript()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-4 py-2 rounded-xl font-medium transition shadow-lg shadow-indigo-600/20 flex items-center gap-2">
-            <i class="fa-solid fa-copy"></i> Copy Script
-        </button>
-    </header>
 
-    <main class="max-w-6xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="space-y-1 text-xs">
+            <p class="text-slate-500 font-semibold px-2 uppercase tracking-wider mb-2">Getting Started</p>
+            <a href="#loading" class="block px-2.5 py-1.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition">Load Library</a>
+            <a href="#windows" class="block px-2.5 py-1.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition">Window Setup</a>
+            <a href="#tabs" class="block px-2.5 py-1.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition">Tabs</a>
+
+            <p class="text-slate-500 font-semibold px-2 uppercase tracking-wider mt-6 mb-2">Interactive Elements</p>
+            <a href="#buttons" class="block px-2.5 py-1.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition">Buttons</a>
+            <a href="#toggles" class="block px-2.5 py-1.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition">Toggles</a>
+            <a href="#sliders" class="block px-2.5 py-1.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition">Sliders</a>
+            <a href="#keybinds" class="block px-2.5 py-1.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition">Keybinds</a>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 md:ml-64 p-6 lg:p-12 max-w-4xl space-y-10">
         
-        <div class="lg:col-span-6 space-y-6">
-            
-            <div class="bg-[#121318] border border-slate-800 rounded-2xl p-5 space-y-4 shadow-xl">
-                <h2 class="text-xs font-semibold uppercase tracking-wider text-indigo-400">Hub Configuration</h2>
-                <div>
-                    <label class="block text-xs font-medium text-slate-400 mb-1">Window Name</label>
-                    <input type="text" id="windowTitle" value="Rayfield Hub" 
-                        class="w-full bg-[#1a1b22] border border-slate-800 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:border-indigo-500 transition"
-                        oninput="updateScript()">
-                </div>
-            </div>
-
-            <div class="bg-[#121318] border border-slate-800 rounded-2xl p-5 space-y-4 shadow-xl">
-                <div class="flex justify-between items-center">
-                    <h2 class="text-xs font-semibold uppercase tracking-wider text-indigo-400">Add UI Elements</h2>
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <button onclick="addElement('button')" class="bg-[#1a1b22] hover:bg-slate-800 border border-slate-800 py-2.5 px-3 rounded-xl text-xs font-medium text-slate-300 transition flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-square-plus text-indigo-400"></i> Button
-                    </button>
-                    <button onclick="addElement('toggle')" class="bg-[#1a1b22] hover:bg-slate-800 border border-slate-800 py-2.5 px-3 rounded-xl text-xs font-medium text-slate-300 transition flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-toggle-on text-indigo-400"></i> Toggle
-                    </button>
-                </div>
-                <div id="elementsList" class="space-y-2 pt-2"></div>
-            </div>
-
+        <div class="space-y-2 border-b border-slate-800 pb-6">
+            <h1 class="text-3xl font-extrabold text-white tracking-tight">API Documentation</h1>
+            <p class="text-sm text-slate-400">Copy distinct element blocks below to construct your custom script layout.</p>
         </div>
 
-        <div class="lg:col-span-6">
-            <div class="bg-[#121318] border border-slate-800 rounded-2xl p-5 sticky top-20 shadow-2xl space-y-3">
-                <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Generated Code</span>
-                </div>
-                <pre class="bg-[#08090c] border border-slate-900 p-4 rounded-xl text-xs text-indigo-300 overflow-x-auto max-h-[450px] leading-relaxed"><code id="scriptOutput"></code></pre>
+        <!-- Section: Loading -->
+        <section id="loading" class="space-y-3">
+            <h2 class="text-xl font-bold text-white">Load Library</h2>
+            <div class="bg-[#121318] border border-slate-800 rounded-xl p-4 relative">
+                <button onclick="copyCode('code-load')" class="absolute top-3 right-3 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-2.5 py-1.5 rounded-lg transition">
+                    <i class="fa-regular fa-copy"></i> Copy
+                </button>
+                <pre class="text-xs text-indigo-300 overflow-x-auto"><code id="code-load">local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/YourUsername/YourRepo/main/source.lua"))()</code></pre>
             </div>
-        </div>
+        </section>
+
+        <!-- Section: Window -->
+        <section id="windows" class="space-y-3">
+            <h2 class="text-xl font-bold text-white">Window Setup</h2>
+            <div class="bg-[#121318] border border-slate-800 rounded-xl p-4 relative">
+                <button onclick="copyCode('code-window')" class="absolute top-3 right-3 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-2.5 py-1.5 rounded-lg transition">
+                    <i class="fa-regular fa-copy"></i> Copy
+                </button>
+                <pre class="text-xs text-indigo-300 overflow-x-auto"><code id="code-window">local Window = Rayfield:CreateWindow({
+    Name = "Aether Hub V2",
+    LoadingTitle = "Aether Suite",
+    LoadingSubtitle = "by Developer"
+})</code></pre>
+            </div>
+        </section>
+
+        <!-- Section: Tabs -->
+        <section id="tabs" class="space-y-3">
+            <h2 class="text-xl font-bold text-white">Tabs</h2>
+            <div class="bg-[#121318] border border-slate-800 rounded-xl p-4 relative">
+                <button onclick="copyCode('code-tab')" class="absolute top-3 right-3 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-2.5 py-1.5 rounded-lg transition">
+                    <i class="fa-regular fa-copy"></i> Copy
+                </button>
+                <pre class="text-xs text-indigo-300 overflow-x-auto"><code id="code-tab">local CombatTab = Window:CreateTab("Combat", 4483345998)
+local MovementTab = Window:CreateTab("Movement", 4483345998)</code></pre>
+            </div>
+        </section>
+
+        <!-- Section: Buttons -->
+        <section id="buttons" class="space-y-3">
+            <h2 class="text-xl font-bold text-white">Buttons</h2>
+            <div class="bg-[#121318] border border-slate-800 rounded-xl p-4 relative">
+                <button onclick="copyCode('code-btn')" class="absolute top-3 right-3 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-2.5 py-1.5 rounded-lg transition">
+                    <i class="fa-regular fa-copy"></i> Copy
+                </button>
+                <pre class="text-xs text-indigo-300 overflow-x-auto"><code id="code-btn">MovementTab:CreateButton({
+    Name = "Instant Teleport to Safezone",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0, 50, 0)
+    end,
+})</code></pre>
+            </div>
+        </section>
+
+        <!-- Section: Toggles -->
+        <section id="toggles" class="space-y-3">
+            <h2 class="text-xl font-bold text-white">Toggles</h2>
+            <div class="bg-[#121318] border border-slate-800 rounded-xl p-4 relative">
+                <button onclick="copyCode('code-toggle')" class="absolute top-3 right-3 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-2.5 py-1.5 rounded-lg transition">
+                    <i class="fa-regular fa-copy"></i> Copy
+                </button>
+                <pre class="text-xs text-indigo-300 overflow-x-auto"><code id="code-toggle">CombatTab:CreateToggle({
+    Name = "Enable Target Lock",
+    Default = false,
+    Flag = "TargetLockFlag",
+    Callback = function(State)
+        print("Target Lock active:", State)
+    end,
+})</code></pre>
+            </div>
+        </section>
+
+        <!-- Section: Sliders -->
+        <section id="sliders" class="space-y-3">
+            <h2 class="text-xl font-bold text-white">Sliders</h2>
+            <div class="bg-[#121318] border border-slate-800 rounded-xl p-4 relative">
+                <button onclick="copyCode('code-slider')" class="absolute top-3 right-3 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-2.5 py-1.5 rounded-lg transition">
+                    <i class="fa-regular fa-copy"></i> Copy
+                </button>
+                <pre class="text-xs text-indigo-300 overflow-x-auto"><code id="code-slider">MovementTab:CreateSlider({
+    Name = "Sprint Speed Modifier",
+    Range = {16, 250},
+    Increment = 1,
+    CurrentValue = 16,
+    Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+    end,
+})</code></pre>
+            </div>
+        </section>
+
+        <!-- Section: Keybinds -->
+        <section id="keybinds" class="space-y-3">
+            <h2 class="text-xl font-bold text-white">Keybinds</h2>
+            <div class="bg-[#121318] border border-slate-800 rounded-xl p-4 relative">
+                <button onclick="copyCode('code-key')" class="absolute top-3 right-3 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-2.5 py-1.5 rounded-lg transition">
+                    <i class="fa-regular fa-copy"></i> Copy
+                </button>
+                <pre class="text-xs text-indigo-300 overflow-x-auto"><code id="code-key">CombatTab:CreateKeybind({
+    Name = "Quick Target Key",
+    CurrentKeybind = "E",
+    HoldToInteract = false,
+    Callback = function(Key)
+        print("Quick key pressed!")
+    end,
+})</code></pre>
+            </div>
+        </section>
 
     </main>
 
-    <script>
-        let customElements = [
-            { type: 'button', name: 'Speed Boost' },
-            { type: 'toggle', name: 'Auto Jump' }
-        ];
-
-        function renderElements() {
-            const list = document.getElementById('elementsList');
-            list.innerHTML = '';
-            
-            customElements.forEach((el, index) => {
-                list.innerHTML += `
-                    <div class="flex items-center gap-2 bg-[#1a1b22] border border-slate-800 p-2.5 rounded-xl">
-                        <span class="text-[10px] uppercase font-bold text-indigo-400 w-12">${el.type}</span>
-                        <input type="text" value="${el.name}" oninput="updateElementName(${index}, this.value)" 
-                            class="flex-1 bg-[#121318] border border-slate-800 rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none focus:border-indigo-500">
-                        <button onclick="removeElement(${index})" class="text-slate-500 hover:text-rose-400 px-2 transition">
-                            <i class="fa-solid fa-trash text-xs"></i>
-                        </button>
-                    </div>
-                `;
-            });
-            updateScript();
-        }
-
-        function addElement(type) {
-            customElements.push({ type: type, name: 'New ' + type.charAt(0).toUpperCase() + type.slice(1) });
-            renderElements();
-        }
-
-        function updateElementName(index, val) {
-            customElements[index].name = val;
-            updateScript();
-        }
-
-        function removeElement(index) {
-            customElements.splice(index, 1);
-            renderElements();
-        }
-
-        function updateScript() {
-            const title = document.getElementById('windowTitle').value;
-
-            let elementsCode = '';
-            customElements.forEach(el => {
-                if (el.type === 'button') {
-                    elementsCode += `\nMainTab:CreateButton({\n    Name = "${el.name}",\n    Callback = function()\n        print("${el.name} executed!")\n    end,\n})\n`;
-                } else if (el.type === 'toggle') {
-                    elementsCode += `\nMainTab:CreateToggle({\n    Name = "${el.name}",\n    Default = false,\n    Callback = function(Value)\n        print("${el.name} state:", Value)\n    end,\n})\n`;
-                }
-            });
-
-            const fullScript = `local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/YourUsername/YourRepo/main/source.lua"))()
-
-local Window = Library:CreateWindow({
-    Name = "${title}"
-})
-
-local MainTab = Window:CreateTab("Main")
-${elementsCode}`;
-
-            document.getElementById('scriptOutput').innerText = fullScript;
-        }
-
-        function copyScript() {
-            navigator.clipboard.writeText(document.getElementById('scriptOutput').innerText);
-            alert("Script copied!");
-        }
-
-        renderElements();
-    </script>
 </body>
 </html>
