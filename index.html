@@ -3,112 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frost UI Suite - Generator</title>
+    <title>Rayfield Style Script Builder</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-[#0f1015] text-slate-100 min-h-screen font-sans selection:bg-indigo-500 selection:text-white">
+<body class="bg-[#0b0c10] text-slate-100 min-h-screen font-sans selection:bg-indigo-500 selection:text-white">
 
-    <!-- Top Navigation Bar -->
-    <header class="border-b border-slate-800 bg-[#14151a]/80 backdrop-blur sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+    <header class="border-b border-slate-800/80 bg-[#121318]/90 backdrop-blur sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
         <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-600/30">
-                <i class="fa-solid fa-layer-group text-white"></i>
+            <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-600/30">
+                <i class="fa-solid fa-code text-white text-sm"></i>
             </div>
-            <div>
-                <h1 class="font-bold tracking-tight text-white">Frost Suite</h1>
-                <p class="text-xs text-slate-400">Interactive UI Script Generator</p>
-            </div>
+            <h1 class="font-bold text-white tracking-tight">Script Builder</h1>
         </div>
         <button onclick="copyScript()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-4 py-2 rounded-xl font-medium transition shadow-lg shadow-indigo-600/20 flex items-center gap-2">
             <i class="fa-solid fa-copy"></i> Copy Script
         </button>
     </header>
 
-    <!-- Main Workspace -->
-    <main class="max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
-
-        <!-- Left Column: Customization Controls (7 Cols) -->
-        <div class="lg:col-span-7 space-y-6">
+    <main class="max-w-6xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <div class="lg:col-span-6 space-y-6">
             
-            <!-- Window Configurations -->
-            <div class="bg-[#14151a] border border-slate-800/80 rounded-2xl p-6 space-y-4 shadow-xl">
-                <h2 class="text-sm font-semibold tracking-wider text-indigo-400 uppercase flex items-center gap-2">
-                    <i class="fa-solid fa-window-maximize"></i> Window Settings
-                </h2>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Hub Name</label>
-                        <input type="text" id="windowTitle" value="Nexus Hub" 
-                            class="w-full bg-[#1b1c23] border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 transition"
-                            oninput="updateScript()">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Loading Subtitle</label>
-                        <input type="text" id="windowSub" value="Interface Suite" 
-                            class="w-full bg-[#1b1c23] border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 transition"
-                            oninput="updateScript()">
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Config Folder Name</label>
-                        <input type="text" id="configFolder" value="NexusConfigs" 
-                            class="w-full bg-[#1b1c23] border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 transition"
-                            oninput="updateScript()">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Theme Accent Color</label>
-                        <input type="color" id="accentColor" value="#6366f1" 
-                            class="w-full h-[42px] bg-[#1b1c23] border border-slate-800 rounded-xl cursor-pointer p-1.5"
-                            oninput="updateScript()">
-                    </div>
+            <div class="bg-[#121318] border border-slate-800 rounded-2xl p-5 space-y-4 shadow-xl">
+                <h2 class="text-xs font-semibold uppercase tracking-wider text-indigo-400">Hub Configuration</h2>
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Window Name</label>
+                    <input type="text" id="windowTitle" value="Rayfield Hub" 
+                        class="w-full bg-[#1a1b22] border border-slate-800 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:border-indigo-500 transition"
+                        oninput="updateScript()">
                 </div>
             </div>
 
-            <!-- Elements Builder Component -->
-            <div class="bg-[#14151a] border border-slate-800/80 rounded-2xl p-6 space-y-4 shadow-xl">
+            <div class="bg-[#121318] border border-slate-800 rounded-2xl p-5 space-y-4 shadow-xl">
                 <div class="flex justify-between items-center">
-                    <h2 class="text-sm font-semibold tracking-wider text-indigo-400 uppercase flex items-center gap-2">
-                        <i class="fa-solid fa-cubes"></i> Add Elements
-                    </h2>
-                    <span class="text-xs text-slate-500">Click to append to script</span>
+                    <h2 class="text-xs font-semibold uppercase tracking-wider text-indigo-400">Add UI Elements</h2>
                 </div>
-
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    <button onclick="addElement('button')" class="bg-[#1b1c23] hover:bg-slate-800 border border-slate-800 py-3 px-4 rounded-xl text-xs font-medium text-slate-300 transition flex flex-col items-center gap-2">
-                        <i class="fa-solid fa-bolt text-indigo-400 text-base"></i> Button
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="addElement('button')" class="bg-[#1a1b22] hover:bg-slate-800 border border-slate-800 py-2.5 px-3 rounded-xl text-xs font-medium text-slate-300 transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-square-plus text-indigo-400"></i> Button
                     </button>
-                    <button onclick="addElement('toggle')" class="bg-[#1b1c23] hover:bg-slate-800 border border-slate-800 py-3 px-4 rounded-xl text-xs font-medium text-slate-300 transition flex flex-col items-center gap-2">
-                        <i class="fa-solid fa-toggle-on text-indigo-400 text-base"></i> Toggle
-                    </button>
-                    <button onclick="addElement('slider')" class="bg-[#1b1c23] hover:bg-slate-800 border border-slate-800 py-3 px-4 rounded-xl text-xs font-medium text-slate-300 transition flex flex-col items-center gap-2">
-                        <i class="fa-solid fa-sliders text-indigo-400 text-base"></i> Slider
-                    </button>
-                    <button onclick="addElement('dropdown')" class="bg-[#1b1c23] hover:bg-slate-800 border border-slate-800 py-3 px-4 rounded-xl text-xs font-medium text-slate-300 transition flex flex-col items-center gap-2">
-                        <i class="fa-solid fa-list text-indigo-400 text-base"></i> Dropdown
+                    <button onclick="addElement('toggle')" class="bg-[#1a1b22] hover:bg-slate-800 border border-slate-800 py-2.5 px-3 rounded-xl text-xs font-medium text-slate-300 transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-toggle-on text-indigo-400"></i> Toggle
                     </button>
                 </div>
-
-                <!-- Active Elements List -->
-                <div id="elementsList" class="space-y-2 pt-2">
-                    <!-- Dynamically populated element controls -->
-                </div>
+                <div id="elementsList" class="space-y-2 pt-2"></div>
             </div>
 
         </div>
 
-        <!-- Right Column: Live Code Preview (5 Cols) -->
-        <div class="lg:col-span-5">
-            <div class="bg-[#14151a] border border-slate-800/80 rounded-2xl p-6 sticky top-24 shadow-2xl space-y-4">
-                <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Output Script</span>
-                    <span class="text-[10px] bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-2 py-0.5 rounded-full font-medium">Ready to Execute</span>
+        <div class="lg:col-span-6">
+            <div class="bg-[#121318] border border-slate-800 rounded-2xl p-5 sticky top-20 shadow-2xl space-y-3">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Generated Code</span>
                 </div>
-                
-                <pre class="bg-[#0b0c10] border border-slate-900 p-4 rounded-xl text-xs text-indigo-300 overflow-x-auto max-h-[500px] leading-relaxed"><code id="scriptOutput"></code></pre>
+                <pre class="bg-[#08090c] border border-slate-900 p-4 rounded-xl text-xs text-indigo-300 overflow-x-auto max-h-[450px] leading-relaxed"><code id="scriptOutput"></code></pre>
             </div>
         </div>
 
@@ -116,9 +65,8 @@
 
     <script>
         let customElements = [
-            { type: 'button', name: 'Respawn Character' },
-            { type: 'toggle', name: 'Auto Farm Enabled' },
-            { type: 'slider', name: 'WalkSpeed Slider' }
+            { type: 'button', name: 'Speed Boost' },
+            { type: 'toggle', name: 'Auto Jump' }
         ];
 
         function renderElements() {
@@ -127,12 +75,12 @@
             
             customElements.forEach((el, index) => {
                 list.innerHTML += `
-                    <div class="flex items-center gap-3 bg-[#1b1c23] border border-slate-800 p-3 rounded-xl">
-                        <span class="text-xs uppercase font-bold text-indigo-400 w-16">${el.type}</span>
+                    <div class="flex items-center gap-2 bg-[#1a1b22] border border-slate-800 p-2.5 rounded-xl">
+                        <span class="text-[10px] uppercase font-bold text-indigo-400 w-12">${el.type}</span>
                         <input type="text" value="${el.name}" oninput="updateElementName(${index}, this.value)" 
-                            class="flex-1 bg-[#14151a] border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-indigo-500">
+                            class="flex-1 bg-[#121318] border border-slate-800 rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none focus:border-indigo-500">
                         <button onclick="removeElement(${index})" class="text-slate-500 hover:text-rose-400 px-2 transition">
-                            <i class="fa-solid fa-trash"></i>
+                            <i class="fa-solid fa-trash text-xs"></i>
                         </button>
                     </div>
                 `;
@@ -157,50 +105,33 @@
 
         function updateScript() {
             const title = document.getElementById('windowTitle').value;
-            const sub = document.getElementById('windowSub').value;
-            const folder = document.getElementById('configFolder').value;
 
             let elementsCode = '';
             customElements.forEach(el => {
                 if (el.type === 'button') {
-                    elementsCode += `\nTab:CreateButton({\n    Name = "${el.name}",\n    Callback = function()\n        print("${el.name} clicked!")\n    end,\n})\n`;
+                    elementsCode += `\nMainTab:CreateButton({\n    Name = "${el.name}",\n    Callback = function()\n        print("${el.name} executed!")\n    end,\n})\n`;
                 } else if (el.type === 'toggle') {
-                    elementsCode += `\nTab:CreateToggle({\n    Name = "${el.name}",\n    Default = false,\n    Flag = "${el.name.replace(/\s+/g, '')}",\n    Callback = function(Value)\n        print("${el.name}:", Value)\n    end,\n})\n`;
-                } else if (el.type === 'slider') {
-                    elementsCode += `\nTab:CreateSlider({\n    Name = "${el.name}",\n    Range = {16, 250},\n    Increment = 1,\n    CurrentValue = 16,\n    Flag = "${el.name.replace(/\s+/g, '')}",\n    Callback = function(Value)\n        print("${el.name}:", Value)\n    end,\n})\n`;
-                } else if (el.type === 'dropdown') {
-                    elementsCode += `\nTab:CreateDropdown({\n    Name = "${el.name}",\n    Options = {"Option 1", "Option 2", "Option 3"},\n    CurrentOption = "Option 1",\n    Flag = "${el.name.replace(/\s+/g, '')}",\n    Callback = function(Option)\n        print("${el.name} selected:", Option)\n    end,\n})\n`;
+                    elementsCode += `\nMainTab:CreateToggle({\n    Name = "${el.name}",\n    Default = false,\n    Callback = function(Value)\n        print("${el.name} state:", Value)\n    end,\n})\n`;
                 }
             });
 
-            const fullScript = `-- Generated via Nexus UI Generator Suite
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/fiveguyswantfinemice-cmyk/FrostUiLibrary/refs/heads/main/FrostUi.lua"))()
+            const fullScript = `local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/YourUsername/YourRepo/main/source.lua"))()
 
 local Window = Library:CreateWindow({
-    Name = "${title}",
-    LoadingTitle = "${sub}",
-    ConfigurationSaving = {
-        Enabled = true,
-        FolderName = "${folder}",
-        FileName = "MainConfig"
-    }
+    Name = "${title}"
 })
 
-local Tab = Window:CreateTab("Main", 4483345998)
-${elementsCode}
--- Initialize UI Configurations
-Library:LoadConfiguration()`;
+local MainTab = Window:CreateTab("Main")
+${elementsCode}`;
 
             document.getElementById('scriptOutput').innerText = fullScript;
         }
 
         function copyScript() {
-            const text = document.getElementById('scriptOutput').innerText;
-            navigator.clipboard.writeText(text);
-            alert("Script successfully copied to clipboard!");
+            navigator.clipboard.writeText(document.getElementById('scriptOutput').innerText);
+            alert("Script copied!");
         }
 
-        // Initialize on load
         renderElements();
     </script>
 </body>
